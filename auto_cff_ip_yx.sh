@@ -97,11 +97,13 @@ update_cf_dns() {
     exit
   fi
   IPs=$(awk -F, 'NR > 1 && NR < 4 {print $1}' result.csv)
-  dns_id1=deb53bcc1cc21f9ce67ecd917f3262c9
-  dns_id2=5fa99d206a850a8a93d5adbe96fd1d48
-  patch_url="https://api.cloudflare.com/client/v4/zones/15a8908bc022a28cc6f711c98df6d215/dns_records/"
-  auth_email="lvxiaowu@outlook.com"
-  auth_key=9dc6e9c5800fba531fcbdb3fe43b14d7c29e2
+
+  # 以下xxxxxxx值根据自己的cloudflare上的信息填写
+  dns_id1=xxxxxxx
+  dns_id2=xxxxxxx
+  patch_url="xxxxxxx"
+  auth_email="xxxxxxx"
+  auth_key=xxxxxx
 
 while read id ip; do
   curl -X PATCH "${patch_url}$id" \
@@ -113,11 +115,12 @@ done < <(echo $dns_id1 $IPs $dns_id2 | awk '{print $1,$2"\n"$4,$3}')
 }
 
 main() {
+  # 检查系统环境
   check_os_and_arch
 
   [ ! -d cffyx ] && mkdir cffyx
 
-  #TMP_DIRECTORY="$(mktemp -d)"
+  # TMP_DIRECTORY="$(mktemp -d)"
   TMP_DIRECTORY="cffyx"
   ZIP_FILE="$TMP_DIRECTORY/txt.zip"
   EXEC_FILE="$TMP_DIRECTORY/CloudflareST_linux_$MACHINE.tar.gz"
@@ -131,7 +134,8 @@ main() {
     exec_yx
   fi
 
-#  update_cf_dns
+  # 默认不更新cloudflare的dns记录
+i # update_cf_dns
 }
 
 main
