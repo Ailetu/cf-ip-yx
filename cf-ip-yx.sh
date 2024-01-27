@@ -88,7 +88,7 @@ exec_yx() {
     ipfile=$TMP_DIRECTORY/ip.txt
   fi
 
-  $TMP_DIRECTORY/CloudflareST -tp $port -url=$proto://cs.xdawa.shop -sl 2 -tl 200 -dn 5 -f $ipfile 
+  $TMP_DIRECTORY/CloudflareST -tp $port -url=$proto://cs.xdawa.shop -sl 1 -tl 200 -dn 5 -f $ipfile 
   
 }
 
